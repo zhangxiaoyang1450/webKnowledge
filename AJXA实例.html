@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--完整的AJAX实例-->
+<!--什么是同步，什么是异步-->
+
+<!--同步现象：客户端发送请求到服务器端，当服务器返回响应之前，客户端都处于等待  卡死状态-->
+
+<!--异步现象：客户端发送请求到服务器端，无论服务器是否返回响应，客户端都可以随  意做其他事情，不会被卡死-->
+
+<!--页面发起请求，会将请求发送给浏览器内核中的Ajax引擎，Ajax引擎会提交请求到服务器端，在这段时间里，客户端可以进行任意操作，-->
+<!--直到服务器端将数据返回给Ajax引擎后，会触发你设置的事件，从而执行自定义的js逻辑代码完成某种功能。-->
+
+<!--js原生的Ajax其实就是围绕浏览器内内置的Ajax引擎对象进行学习的，要使用js原生的Ajax完成异步操作，有如下几个步骤：-->
+
+<!--1)创建Ajax引擎对象-->
+
+<!--2)为Ajax引擎对象绑定监听（监听服务器已将数据响应给引擎）-->
+
+<!--3)绑定提交地址-->
+
+<!--4)发送请求-->
+
+<!--5)接受响应数据-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX实例</title>
+    <script language="javascript" type="text/javascript">
+        <!--
+        var xmlHttpRequest;  //定义一个变量用于存放XMLHttpRequest对象
+        //定义一个用于创建XMLHttpRequest对象的函数
+        function createXMLHttpRequest()
+        {
+            if(window.ActiveXObject)
+            {
+                //IE浏览器的创建方式
+                xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }else if(windew.XMLHttpRequest)
+            {
+                //Netscape浏览器中的创建方式
+                xmlHttpRequest = new XMLHttpRequest();
+            }
+        }
+        //响应HTTP请求状态变化的函数
+        function httpStateChange()
+        {
+            //判断异步调用是否完成
+            if(xmlHttpRequest.readyState == 4)
+            {
+                //判断异步调用是否成功,如果成功开始局部更新数据
+                if(xmlHttpRequest.status == 200||xmlHttpRequest.status == 0)
+                {
+                    //查找节点
+                    var node = document.getElementById("myDIv");
+                    //更新数据
+                    node.firstChild.nodeValue = xmlHttpRequest .responseText;
+                }
+                else
+                {
+                    //如果异步调用未成功,弹出警告框,并显示出错信息
+                    alert("异步调用出错/n返回的HTTP状态码为:"+xmlHttpRequest.status + "/n返回的HTTP状态信息为:" + xmlHttpRequest.statusText);
+                }
+            }
+        }
+        //异步调用服务器段数据
+        function getData(name,value)
+        {
+            //创建XMLHttpRequest对象
+            createXMLHttpRequest();
+            if(xmlHttpRequest!=null)
+            {
+                //创建HTTP请求
+                xmlHttpRequest.open("get","ajax.text",true)
+                //设置HTTP请求状态变化的函数
+                xmlHttpRequest.onreadystatechange = httpStateChange;
+                //发送请求
+                xmlHttpRequest.send(null);
+            }
+        }
+        -->
+    </script>
+</head>
+<body>
+<div id="myDiv">原数据</div>
+<input type = "button" value = "更新数据" onclick = "getData()">
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+原型：每个对象都包含一个原型属性，用于关联另一个对象，关联后就能使用那个对象的属性和方法
+原型链：
+对象之间通过原型关联到一起，就好比用一条锁链将一个个对象连接在哪一起，在与各个对象挂钩后，最终形成了一条原型链。
+在读取对象的一个属性时，会先在对象中查询自由属性，如果不存在，再沿着原型链向上搜索匹配 的继承属性，直至找到或到达原型链顶端，才停止搜索
+事实上，js里完全依靠"原型链"(prototype chain)模式来实现继承。
+上面说完原型对象。下面要扒一扒proto、prototype、constructor。
+
+proto：事实上就是原型链指针！！
+prototype：上面说到这个是指向原型对象的
+constructor：每一个原型对象都包含一个指向构造函数的指针，就是constructor
+
+继承实现方式：
+为了实现继承，proto会指向上一层的原型对象，而上一层的结构依然类似，
+那么就利用proto一直指向Object的原型对象上！
+Object.prototype.__proto__ = null;
+表示到达最顶端。如此形成了原型链继承。
+
+原型对象的
+用途是为每个实例对象存储共享的方法和属性，它仅仅是一个普通对象而已。
+并且所有的实例是共享同一个原型对象，因此有别于实例方法或属性，原型对象仅有一份
+
+那么原型对象就即将登场了！Brendan Eich决定给每一个构造函数都设置一个prototype属性，
+这个属性就指向原型对象。其实原型对象就只是个普通对象，里面存放着所有实例对象需要共享的属性和方法！
+所以，我们把需要共享的放到原型对象里，把那些不需要共享的属性和方法存在在构造函数里！
+3.继承
+组合继承：
+优点：
+可以继承实例属性/方法，也可以继承原型属性/方法
+既是子类的实例，也是父类的实例
+不存在引用属性共享问题
+可传参
+函数可复用
+缺点：调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）
+function Person(name,age){
+this.name = name;
+this.age = age;
+}
+Person.prototype.say = function(){
+console.log(this.name +"haha");
+}
+function Coder(name,age){
+// this
+// 调用父类的Person.call()   继承属性
+Person.call(this,name,age);
+}
+// 继承父类的方法
+Coder.prototype = new Person();
+// Coder的原型对象下的constructor属性 指向 Coder
+Coder.prototype.constructor = Coder;
+var c1 = new Coder('lisi',20);
+c1.say();
+
+寄生组合继承：
+// 定义一个动物类
+function Animal (name) {
+// 属性
+this.name = name || 'Animal';
+// 实例方法
+this.sleep = function(){
+console.log(this.name + '正在睡觉！');
+}
+}
+// 原型方法
+Animal.prototype.eat = function(food) {
+console.log(this.name + '正在吃：' + food);
+};
+
+function Cat(name){
+Animal.call(this);
+this.name = name || 'Tom';
+}
+(function(){
+// 创建一个没有实例方法的类
+var Super = function(){};
+Super.prototype = Animal.prototype;
+//将实例作为子类的原型
+Cat.prototype = new Super();
+})();
+
+</body>
+</html>

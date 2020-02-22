@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+四、CSS
+1.css 选择器
+    id选择器
+    class选择器
+    标签选择器
+    后代选择器 div p
+    子带选择器  div > p
+    伪类类选择器 :hover
+    伪元素选择器  ::after
+    群组选择器  div,p
+    属性选择器  div[id]
+    紧邻的兄弟元素 div+p
+    后边所有的div ~ p
+
+2.css优先级
+    !important
+    style  1000
+    id    100
+    class 10
+    标签   1
+8.CSS3
+
+    新特性：
+
+    border-radius 圆角
+    box-shadow 边框阴
+    transform
+    translate
+    rotate
+    scale
+    flex
+    多媒体查询@media
+    动画animation
+    背景
+    background-image背景图片
+    background-size：cover保持横纵比与背景盒子最小大小，contain 保持横纵比缩放成适合盒子最大大小
+
+    #div1{
+    width: 200px;
+    height: 200px;
+    background: #ff0000;
+              /* 属性  执行时间 运动方式 延迟时间 */
+    /* transition: width 2s ease 2s ; */
+    /* 动画名 执行时间 运动方式 延迟时间 执行次数 */
+    animation: run 3s linear 2s 2 ;
+    }
+    @keyframes run {
+    50%{
+    width:800px;
+    }
+    100%{
+    width:500px;
+    }
+    }
+    #div1:hover{
+    width:800px;
+    }
+    选择器
+    :last-child /* 选择元素最后一个孩子 */
+    :first-child /* 选择元素第一个孩子 */
+    :nth-child(1) /* 按照第几个孩子给它设置样式 */
+    :nth-child(even) /* 按照偶数 */
+    :nth-child(odd)  /* 按照奇数 */
+    :disabled /* 选择每个禁用的E元素 */
+    :checked /* 选择每个被选中的E元素 */
+    :not(selector) /* 选择非 selector 元素的每个元素 */
+    ::selection /* 选择被用户选取的元素部分 */
+    伪元素
+    ::before {} /* 选择器在被选元素的前面插入内容和定义css，使用 content 属性来指定要插入的内容。 */
+    ::after {} /* 选择器在被选元素的后面插入内容和定义css，使用 content 属性来指定要插入的内容。 */
+    :first-letter /* 选择该元素内容的首字母 */
+    :first-line /* 选择该元素内容的首行 */
+    ::selection /* 选择被用户选取的元素部分 */
+    background-image: url("../img/2.png");
+    background-repeat: no-repeat;
+    /*background-position: 100px 10px;*/
+    /*background-size: contain;*/
+    /*background-color: #000;*/
+
+    word-wrap: break-word 设置或检索当当前行超过指定容器的边界时是否断开转行
+    /*text-overflow: clip;*/不是省略标记，溢出隐藏
+    /*text-overflow: ellipsis;*/当对象内文本溢出时显示...
+
+
+
+
+9.常见兼容性问题
+* png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.也可以引用一段脚本处理.
+
+* 浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
+
+* IE6双边距bug:块属性标签float后，又有横行的margin情况下，在ie6显示margin比设置的大。
+
+* 浮动ie产生的双倍距离（IE6双边距问题：在IE6下，如果对元素设置了浮动，同时又设置了margin-left或margin-right，
+margin值会加倍。）
+#box{ float:left; width:10px; margin:0 0 0 100px;}
+
+这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 ——_display:inline;将其转化为行内属性。
+(_这个符号只有ie6会识别)
+
+*  渐进识别的方式，从总体中逐渐排除局部。
+
+首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。
+接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
+
+css
+.bb{
+background-color:#f1ee18;/*所有识别*/
+.background-color:#00deff\9; /*IE6、7、8识别*/
++background-color:#a200ff;/*IE6、7识别*/
+_background-color:#1e0bd1;/*IE6识别*/
+}
+
+*  IE下,可以使用获取常规属性的方法来获取自定义属性,
+也可以使用getAttribute()获取自定义属性;
+Firefox下,只能使用getAttribute()获取自定义属性.
+解决方法:统一通过getAttribute()获取自定义属性.
+
+* IE下,event对象有x,y属性,但是没有pageX,pageY属性;
+Firefox下,event对象有pageX,pageY属性,但是没有x,y属性.
+
+* 解决方法：（条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
+
+* Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
+可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
+
+* 超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的
+排列顺序:
+L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+
+* 怪异模式问题：漏写DTD声明，Firefox仍然会按照标准模式来解析网页，但在IE中会触发怪异模式。为避免怪异模式给我
+们带来不必要的麻烦，最好养成书写DTD声明的好习惯。现在可以使用[html5](http://www.w3.org/TR/html5/
+single-page.html)推荐的写法：`< doctype html>`
+
+* 上下margin重合问题
+ie和ff都存在，相邻的两个div的margin-left和margin-right不会重合，但是margin-top和margin-bottom却会发生重合。
+解决方法，养成良好的代码编写习惯，同时采用margin-top或者同时采用margin-bottom。
+* ie6对png图片格式支持不好(引用一段脚本处理)
+
+10.iframe的优缺点？
+<!--1.<iframe>优点：-->
+解决加载缓慢的第三方内容如图标和广告等的加载问题
+Security sandbox
+并行加载脚本
+<!--2.<iframe>的缺点：-->
+*iframe会阻塞主页面的Onload事件；
+*即时内容为空，加载也需要时间
+*没有语意
+</body>
+</html>

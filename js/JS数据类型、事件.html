@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+五、js
+1.js数据类型
+基本数据类型  string number boolean null undefined symbol
+基本数据类型（存放在栈内存中）
+基本数据类型是指存放在栈中的简单数据段，数据大小确定，内存空间大小可以分配，它们是直接按值存放的，所以可以直接按值访问
+
+引用数据类型  array object
+引用数据类型（存放在堆内存中的对象，每个空间大小不一样，要根据情况进行特定的配置）
+引用类型是存放在堆内存中的对象，变量其实是保存的在栈内存中的一个指针（保存的是堆内存中的引用地址），
+这个指针指向堆内存。
+引用类型数据在栈内存中保存的实际上是对象在堆内存中的引用地址。通过这个引用地址可以快速查找到保存中堆内存中的对象
+typeof "123"  => "string"
+typdof 123    => "number"
+typeof true   => "boolean"
+typeof null   => "object"
+typeof undefined  => "undefined"
+typeof [1,2,3]   => "object"
+typeof {name:'zs'}   => "object"
+typeof 函数 => "function"
+
+
+
+5.事件
+(1)概念
+事件：怎么触发这个事情  （一般是动词，触发事件，比如点击开关）
+事件处理函数：怎么触发这个事情  （一般是动词，触发事件，比如点击开关）
+事件源：要触发的对象  （一般是名词，事件发起者，比如开关按钮）
+<!--
+<div id="div1">
+    div1
+    <div id="div2">
+        div2
+    </div>
+</div>
+!-->
+var oDiv = document.getElementById('div1');
+oDiv.onclick = function(e){
+console.log('dfghjk');
+// 事件源
+console.log(e.target);
+// this 对当前对象引用
+console.log(this);
+}
+(2)事件冒泡和捕获
+冒泡：（自底向上）触发顺序一样
+捕获：（自顶向下）触发顺序一样
+同时有冒泡和捕获的时候  先捕获 再冒泡 （先从外到里，再从里往外）
+阻止事件冒泡:
+e.stopPropagation();
+e.cancelBubble = true;//ie
+阻止默认行为:
+return false;
+e.preventDefault();
+e.returnValue = false;
+<!--
+<div id="div1">
+    div1
+    <div id="div2">
+        div2
+    </div>
+</div>
+<a href="http:www.baidu.com" id="btn">baidu</a>
+-->
+var oDiv1 = document.getElementById('div1');
+var oDiv2 = document.getElementById('div2');
+var oBtn = document.getElementById('btn');
+oDiv1.onclick = function(e){
+console.log('div1 click');
+}
+oDiv2.onclick = function(e){
+console.log('div2 click');
+// 阻止事件冒泡
+e.stopPropagation();
+// ie
+e.cancelBubble = true;
+}
+oBtn.onclick = function(e){
+console.log('dfghjkl;');
+// 阻止默认行为
+// return false;
+e.preventDefault();
+e.returnValue = false;
+}
+
+// 捕获true 或 冒泡false
+// oDiv1.addEventListener('click',function(){
+//     console.log('div1 click2');
+// },false);
+(3)事件委托：
+后生成元素的事件绑定问题
+解决：
+<!--
+<button id="btn">click</button>
+<ul id="ul1">
+    <li>11111</li>
+    <li>22222</li>
+    <li>33333</li>
+</ul>
+!-->
+var aLi = document.getElementsByTagName('li');
+var oBtn = document.getElementById('btn');
+var oUl = document.getElementById('ul1');
+<!-- for(var i=0; i<aLi.length; i++){!-->
+//     aLi[i].onclick = function(){
+//         console.log(this.innerHTML);
+//     }
+// }
+oBtn.onclick = function(){
+var oLi = document.createElement('li');
+oLi.innerHTML = Math.random();
+oUl.appendChild(oLi);
+}
+将事件绑定已存在的父元素上，当点击子元素的时候，通过事件冒泡 ，事件会冒泡到父元素身上
+oUl.onclick = function(e){
+// console.log(e.target.tagName)
+if(e.target.tagName == "LI"){
+console.log(e.target.innerHTML);
+}
+}
+
+8.函数防抖
+函数去抖
+一个需要频繁触发的函数，在规定时间内只让最后一次生效，前面的不生效
+比如 搜索
+
+function debounce(fn,delay) {
+var timer = null;
+return function(){
+clearTimeout(timer);
+
+timer = setTimeout(() => {
+fn.apply(this);
+},delay);
+}
+}
+var oBtn = document.getElementById('btn');
+oBtn.onclick = debounce(function(){
+console.log(Date.now());
+console.log(this);
+},300);
+// oBtn.onclick = function () {
+//     console.log(Date.now());
+// }
+
+</body>
+</html>

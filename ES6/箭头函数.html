@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+使用ES6箭头函数语法定义函数，将原函数的“function”关键字和函数名都删掉，并使用“=>”连接参数列表和函数体。
+当函数参数只有一个，括号可以省略；但是没有参数时，括号不可以省略。
+2.箭头函数
+箭头函数this指向父作用域的this (声明时的this) 普通函数中的this指向调用时的this
+(1)函数体内的this对象，就是定义时所在的对象，而不是使用
+时所在的对象。
+(2)不可以当作构造函数，也就是说，不可以使用new命令，否
+则会抛出一个错误。
+(3)不可以使用arguments对象，该对象在函数体内不存在。
+如果要用，可以用 rest 参数代替。
+注释：了解arguments这个对象之前先来认识一下javascript的一些功能：
+其实Javascript并没有重载函数的功能， 但是Arguments对象能够模拟重载
+Javascrip中每个函数都会有一个Arguments对象实例arguments，
+它引用着函数的实参，可以用数组下标的方式"[]"引用arguments的元素，
+arguments.length为函数实参个数，arguments.callee引用函数自身。
+apply调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments)；即A对象调用B对象的方法。func.apply(thisArg, [argsArray])
+call调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.call(A, args1,args2)；即A对象调用B对象的方法。func.call(thisArg, arg1, arg2, ...)
+
+箭头函数和function区别
+1.写法不同
+2.使用function定义的函数，this的指向随着调用环境的变化而变化的，而箭头函数中的this指向是固定不变的，一直指向的是定义函数的环境。
+3.function是可以定义构造函数的，而箭头函数是不行的。
+由于js的内存机制，function的级别最高，而用箭头函数定义函数的时候，需要var(let const定义的时候更不必说)关键词，
+而var所定义的变量不能得到变量提升，故箭头函数一定要定义于调用之前！
+
+</body>
+</html>

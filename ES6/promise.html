@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+4.promise
+Promise 是异步编程的一种解决方案，将异步操作以同步
+操作的流程表达出来，避免了层层嵌套的回调函数（俗称回调
+地狱）
+一个promise可能有三种状态：pending（进行中）、fulfilled（已成功）和
+rejected（已失败）
+一个promise的状态只可能从“等待”转到“成功”态或者“失败”态，不能逆
+向转换，同时“成功”态和“失败”态不能相互转换
+
+缺点：无法取消 Promise，错误需要通过回调函数捕获
+
+async/await
+
+async 就是将函数返回值使用 Promise.resolve() 包裹了下，和 then 中处理返回值一样，并且 await 只能配套 async 使用
+async 和 await 可以说是异步终极解决方案了，相比直接使用 Promise 来说，优势在于处理 then的调用链，能够更清晰准确的写出代码，
+毕竟写一大堆 then 也很恶心，并且也能优雅地解决回调地狱问题。当然也存在一些缺点，因为 await 将异步代码改造成了同步代码，如果
+多个异步代码没有依赖性却使用了 await 会导致性能上的降低
+
+成功调用resolve()，失败调用reject()
+Promise.all() 都执行完 再执行, Promise.race() 最快的那个执行完了就执行 ；
+
+// $.get(function(data){
+//     $.get(function(data){
+//         $.get(function(data){
+//         })
+//     })
+// })
+// let p1 = new Promise(function(resolve,reject){
+//     setTimeout(() => {
+//         console.log(1111)
+//         resolve();
+//     }, 2000);
+// }).then(function(){
+//     return new Promise(function(resolve,reject){
+//         console.log(222+"开始");
+//         setTimeout(() => {
+//             console.log(222+"成功")
+//             resolve();
+//         }, 1000);
+//     })
+// },function(){
+// }).then(function(){
+//     console.log('成功');
+// })
+// .catch(function(){
+// })
+let p1 = new Promise(function(resolve,reject){
+setTimeout(() => {
+console.log(11111)
+resolve(1111);
+}, 1000);
+// setTimeout(resolve, 1000);
+})
+let p2 = new Promise(function(resolve,reject){
+setTimeout(() => {
+console.log(2222)
+reject(2222);
+}, 3000);
+// setTimeout(resolve, 1000);
+})
+let p3 = new Promise(function(resolve,reject){
+setTimeout(() => {
+console.log(333)
+resolve(3333);
+}, 500);
+// setTimeout(resolve, 1000);
+})
+// Promise.all([p1,p2,p3]).then(function(result){
+//     console.log(result);
+// })
+Promise.race([p1,p2,p3]).then(function(xx){
+// console.log(xx);
+console.log('okoko');
+})
+</body>
+</html>

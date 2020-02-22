@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+1.opacity 属性的意思是设置一个元素的透明度。它不是为改变元素的边界框（bounding box）而设计的。
+这意味着将 opacity 设为 0 只能从视觉上隐藏元素。而元素本身依然占据它自己的位置并对网页的布局起作用。
+
+2. display:none  隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，
+就当他从来不存在。
+
+3.visibility:hidden  隐藏对应的元素，但是在文档布局中仍保留原来的空间。
+这个属性也能够实现动画效果，只要它的初始和结束状态不一样。这确保了 visibility 状态切换之间的过渡动画可以是时间平滑的
+
+4.设有一个元素你想要与它交互，但是你又不想让它影响你的网页布局，
+没有合适的属性可以处理这种情况（opacity 和 visibility 影响布局， display 不影响布局但又无法直接交互——译者注）。
+在这种情况下，你只能考虑将元素移出可视区域。这个办法既不会影响布局，有能让元素保持可以操作。下面是采用这种办法的 CSS：
+        .hide {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+5.overflow:hidden;
+        visible	默认值。内容不会被修剪，会呈现在元素框之外。
+        hidden	内容会被修剪，并且其余内容是不可见的。
+        scroll	内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+        auto	如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。
+        inherit	规定应该从父元素继承 overflow 属性的值。
+
+6.clip-path属性可以创建一个只有元素的部分区域可以显示的剪切区域。
+区域内的部分显示，区域外的隐藏。剪切区域是被引用内嵌的URL定义的路径或者外部svg的路径，或者作为一个形状例如circle().。
+clip-path: polygon(0px 0px,0px 0px,0px 0px,0px 0px,);
+
+7.Z-index :-1000
+8.transform:scale(0,0)将元素缩小到0
+CSS中 link 和@import 的区别是？
+(1) link属于HTML标签，而@import是CSS提供的;
+(2) 页面被加载的时，link会同时被加载， 而@import引用的CSS会等到页面被加载完再加载;
+(3) import只在IE5以上才能识别，而link是HTML标签，无兼容问题;
+(4) link方式的样式的权重 高于@import的权重.
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+vuex:
+Vuex可以被看作项目中所有组件的数据中心,我们将所有组件中共享的State抽离出来,任何组件都可以访问和操作我们的数据中心.
+
+state中保存着共有数据
+改变state中的数据有且只有通过mutations中的方法,且mutations中的方法必须是同步的
+如果要写异步的方法,需要些在actions中, 并通过commit到mutations中进行state中数据的更改.
+
+state访问状态对象 存值
+mutations修改状态 修改值（通过调用commit（方法名,参数）方法访问mutations中方法）
+getters计算过滤操作 相当于计算属性
+actions异步修改状态
+
+Vuex的组成,一个实例化的Vuex.Store由state, mutations和actions三个属性组成:
+
+state中保存着共有数据
+改变state中的数据有且只有通过mutations中的方法,且mutations中的方法必须是同步的
+如果要写异步的方法,需要些在actions中, 并通过commit到mutations中进行state中数据的更改.
+</body>
+</html>

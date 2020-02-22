@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+5、深拷贝和浅拷贝
+深拷贝和浅拷贝的使用场景是在复杂对象里，即对象的属性还是对象
+
+（1）浅拷贝是指只复制一层对象，当对象的属性是引用类型时，实质复制的是其引用，当引用指向的值改变时也会跟着变化
+（2）深拷贝是指复制对象的所有层级
+通过JSON解析实现
+//把一个对象转成json字符串在转成json对象
+JSON.parse(JSON.stringify(o))
+</body>
+</html>

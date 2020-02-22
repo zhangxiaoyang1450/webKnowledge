@@ -1,0 +1,26 @@
+src和href的区别:
+    两者功能不同，href能够建立一条通道，将当前的文档和定义的资源连接起来
+    src是将定义的资源嵌入到当前文档中
+表格：  col  表格的一列
+        th  表格的单元格(表头)
+        tr  表格的行
+        td  表格的单元格
+ 绘图—图形技术
+ Canvas:基于位图的图像，无数个像素点组成，图像会失真
+ SVG:基于矢量的图形，两点之间曲线或者直线连接，不失真，常用于三维建模，特殊字体，图标
+
+
+<table border="1">
+    <tr>
+        <th>Heading</th>
+        <th>Another Heading</th>
+    </tr>
+    <tr>
+        <td>row 1, cell 1</td>
+        <td>row 1, cell 2</td>
+    </tr>
+    <tr>
+        <td>row 2, cell 1</td>
+        <td>row 2, cell 2</td>
+    </tr>
+</table>

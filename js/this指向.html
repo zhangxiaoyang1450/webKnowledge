@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ 改变this指向（谁调用这个函数，this就是谁）
+将aa中的this指向括号中的第一个参数
+aa.call(this,1,2,3)
+aa.apply(this,[1,2,3])
+apply() 与call（）非常相似，不同之处在于提供参数的方式,apply（）使用参数数组，而不是参数列表
+aa.bind(this,1,2,3)
+bind()创建的是一个新的函数（称为绑定函数），与被调用函数有相同的函数体，
+
+
+ // this指向的情况，取决于函数调用的方式有哪些：
+//
+// 通过函数名()直接调用的：this指向window
+// 通过对象.函数名()调用的：this指向这个对象；
+// 函数作为数组的一个元素，通过数组下标调用的：this指向这个数组
+// 函数作为window内置函数的回调函数调用时：this指向window.setTimeout(func,XXms);setInterval(func,XXms)等
+// 函数作为构造函数，用new关键字调用时：this指向的是new出的新对象
+// 通过函数指定，用apply()\call()\bind() 方法指定this
+// 箭头函数中的this问题，指向为定义时的this，而不是执行时的this
+//
+ // 普通函数中的this指向函数被调用的对象，因此对于不同的调用者，this的值是不同的
+ //
+ // 箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域
+ // 正是因为它没有this，所以也就不能用作构造函数
+ // 不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出错误
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+2. 判断数组和对象、JS中常用方法
+Array.isArray
+instanceof(instanceof是通过返回一个布尔值来指出，这个对象是否是这个特定类或者是它的子类的一个实例。)
+constructor
+
+Array下的常用方法：
+Array.map()将数组中的每个元素调用一个提供的函数，结果作为一个新的数组返回，并没有改变原来的数组
+Array.forEach()将数组中的每个元素执行传进提供的函数，没有返回值，直接改变原数组
+Array.filter()将所有元素进行判断，将满足条件的元素作为一个新的数组返回
+Array.push()在数组的后面添加新加元素，此方法改变了数组的长度
+Array.pop()在数组后面删除最后一个元素，并返回数组，此方法改变了数组的长度
+Array.shift()在数组后面删除第一个元素，并返回数组，此方法改变了数组的长度
+Array.unshift()将一个或多个元素添加到数组的开头，并返回新数组的长度
+Array.isArray()判断一个对象是不是数组，返回的是布尔值
+Array.concat()可以将多个数组拼接成一个数组
+Array.toString()将数组转化为字符串
+Array.splice(开始位置,删除的个数,此位置后添加的元素);万能方法，可以实现增删改
+
+String下的常用方法
+String.charCodeAt()方法返回一个整数，代表指定位置字符的Unicode编码
+String.fromCharCode()方法从一些Unicode字符串中返回一个字符串
+例:String.fromCharCode(65,66,112);
+结果：ABp
+String.charAt()方法返回指定索引位置处的字符。如果超出有效范围的索引值返回空字符串。
+例如：
+var str = "ABC";
+str.charAt(1);
+结果：B
+String.slice()方法返回字符串的片段。
+例如：
+012345
+var str = "ABCDEF";
+str.slice(2,4);
+结果：CD
+String.substring()方法返回位于String对象中指定位置的子字符串。
+例如：
+012345
+var str = "ABCDEF";
+str.substr(2,4);
+结果：CDEF
+String.indexOf()方法放回String对象内第一次出现子字符串位置。如果没有找到子字符串，则返回-1。
+例如：
+01234567
+var str = "ABCDECDF";
+str.indexOf("CD"，1); // 由1位置从左向右查找 123...
+结果：2
+String.split()将一个字符串分割为子字符串，然后将结果作为字符串数组返回。
+例如：
+var str = "AA BB CC DD EE FF";
+alert(str.split(" "，3));
+结果：
+AA,BB,CC
+2.类：具有相同的属性和方法的集合
+声明类 属性写在构造函数中
+方法写在原型下
+
+// var p1 = {
+//     name:'zs',
+//     age:20,
+//     say:function(){
+//         console.log('哈哈')
+//     }
+// }
+// 构造函数
+function Person(name,age){
+this.name = name,
+this.age = age
+// this.say = function(){
+//     console.log( this.name +"Hehe");
+// }
+}
+__proto__ 属性和prototype属性的区别
+prototype是function对象中专有的属性。
+__proto__是普通对象的隐式属性，在new的时候，会指向prototype所指的对象；
+__proto__实际上是某个实体对象的属性，而prototype则是属于构造函数的属性。
+__proto__只能在学习或调试的环境下使用。
+// 原型  prototype
+/*
+prototype
+函数有一个prototype属性，这个属性是一个指针 指向他的原型对象
+原型对象下的属性和方法  可以被实例化对象所共享
+原型下有一个constructor 属性指向他的构造函数
+
+__proto__
+原型链：
+当从一个对象那里调取属性或方法时，如果该对象自身不存在这样的属性或方法，
+就会去自己关联的prototype对象那里寻找，如果prototype没有，
+就会去prototype关联的前辈prototype那里寻找，
+如果再没有则继续查找Prototype.Prototype引用的对象，依次类推，
+直到Prototype.….Prototype为undefined（Object的Prototype就是undefined）
+从而形成了所谓的“原型链”。
+*/
+</body>
+</html>

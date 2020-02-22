@@ -1,0 +1,61 @@
+块级作用域概念:
+（1）.花括号{}和其中代码生成一个块。
+（2）.在块中，let和const声明的变量和常量对外都是不可见的，称之为块级作用域。
+（3）.只有使用let和const声明的变量或者常量在块中对外不可见，var声明的变量对外依然可见。
+可以这么认为，是let和const创建了块级作用域。
+
+ES5 只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景。
+ES6中增加了块级作用域的概念，
+let 命令
+1. let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。
+{
+    let a =10;
+    var b= 8;
+}
+console.log(a);//ReferenceError: a is not defined(let声明的变量只在当前代码块内有效)
+console.log(b);//1
+2. 不存在变量提升
+ 对比：var命令会发生”变量提升“现象，即变量可以在声明之前使用，值为undefined
+// var 的情况
+console.log(a); // 输出undefined
+var a = 2;
+ // let 的情况
+console.log(b); // 报错ReferenceError
+let b = 2;
+3. 不允许重复声明
+let不允许在相同作用域内，重复声明同一个变量。
+4. 暂时性死区
+只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响
+在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。
+var tmp = 888;
+if (true) {
+  tmp = 'abc'; // ReferenceError
+  let tmp;
+}
+说明：
+    由于存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，
+    同一个作用域内，不能重复声明同一个变量，所以在let声明前，对tmp进行赋值则报错
+const
+1. const声明一个只读的常量。一旦声明，常量的值就不能改变。
+const PI = 3.1415;
+PI // 3.1415
+PI = 3;
+// TypeError: Assignment to constant variable.
+说明：
+const一旦初始化赋值，就不能改变
+2. const一旦声明变量，就必须立即初始化，不能留到以后赋值。对于const来说，只声明不赋值，就会报错
+const a;// SyntaxError: Missing initializer in const declaration
+说明：const一旦声明，必须赋值
+3. const命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。
+if (true) {
+  console.log(b); // ReferenceError
+  const b = 5;
+}
+4. const的作用域与let命令相同：只在声明所在的块级作用域内有效。
+if (true) {
+  const b= 2;
+}
+console.log(b);//报错
+var：变量提升（无论声明在何处，都会被提至其所在作用于的顶部）
+let：无变量提升（未到let声明时，是无法访问该变量的）
+const：无变量提升，声明一个基本类型的时候为常量，不可修改；声明对象可以修改

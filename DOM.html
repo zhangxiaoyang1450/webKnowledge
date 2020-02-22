@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+https://blog.csdn.net/qq_24099547/article/details/86603585
+1. DOM（增删改查★★★★★）DOM对象：
+Document Object Model 文档对象模型作用：通过DOM对象可以访问和操作html文件的每一个标签。
+html文档加载到浏览器的内存中后，我们认为形成了一颗DOM树，即html标签按照层级结构而形成了一颗“家谱树”，而任何一个html标签、标签属性和文本都是这个树上的节点元素。在这里插入图片描述
+我们可以通过js的DOM组件中的方法对内存中的DOM树上的结构和内容进行修改，即通过js动态的修改内存中的那一份html及css的代码。
+
+W3C组织规定：当浏览器把一个html文件加载到内存中之后，这个html文件，就是一个Document对象。
+
+并且在浏览器加载html文件中的所有标签时，把html文件中的所有标签页加载成不同的对象，以及标签中的属性，也加载成对象，标签中的文本也加载成对象。
+
+浏览器在加载某个标签时，标签的文本数据，被加载成当前标签的一个子标签。当我们把一个html文件加载完成之后，他们就得到这个html文件中的所有标签，属性，文本对象。
+
+可以使用js技术结合Document对象，对html文件中的所有标签，进行各种操作。在浏览器把html文件加载完成之后，标签被称作标签对象（元素节点），标签中的文件称为文本节点（文本对象），标签的属性称为属性节点（属性对象）。在这里插入图片描述
+
+1.1. DOM的操作方法
+1.1.1. 标签元素的操作
+获得元素对象
+document.getElementById(“ID名”);
+    返回指定的id对象
+    <input type="text" id="username"/>
+    <script type="text/javascript">
+        //根据id属性值获得文本框对象，并打印
+        var username = document.getElementById('username');
+        alert(username);
+    </script>
+
+    下面三个获取的都是一个数组！
+    document.getElementsByName("name名");		返回指定name值的对象集合
+    document.getElementsByTagName("标签名");		返回指定标签名的对象集合
+    document.getElementsByClassName("class名");	返回指定class名的对象集合
+    在js中不分数据类型，所以可以直接通过var object接收集合
+
+    var username = document.getElementsByTagName('input');
+    alert(username)；
+document.getElementsByName(“name名”);
+        <input type="text" name="username"/>
+        <input type="text" name="username"/>
+        <input type="text"/>
+        <script type="text/javascript">
+            //根据name属性值获得匹配对象的个数
+            var username = document.getElementsByName('username');
+            alert(username.length);    //2
+        </script>
+document.getElementsByTagName(“标签名”);
+        <input type="text"/>
+        <textarea></textarea>
+        <input type="text"/>
+        <script type="text/javascript">
+            //根据TagName属性值获得匹配对象的个数
+            var username = document.getElementsByTagName('input');
+            alert(username.length);     //2
+        </script>
+document.getElementsByClassName(“class名”);
+
+        <input type="text" class="txt"/>
+        <input type="text"/>
+        <input type="text" class="txt"/>
+        <script type="text/javascript">
+            //根据ClassName属性值获得匹配对象的个数
+            var username = document.getElementsByClassName('txt');
+            alert(username.length);    //2
+        </script>
+
+创建一个新元素
+document.createElement(“tagName”); 创建标签对象
+需要与appendChild() 或 insertBefore()方法联合使用
+
+1.创建链接
+
+        <script type="text/javascript">
+            var o = document.body;
+            //创建链接
+            function createA(url,text)
+            {
+                var a = document.createElement("a");
+                a.href = url;
+                a.innerHTML = text;
+                a.style.color = "red";
+                o.appendChild(a);
+            }
+            createA("http://www.baidu.com/","网页教学网");
+        </script>
+在js中使用createElement创建HTML对象和元素
+
+
+标签内容的获取与设置
+Element.innerHTML;		获取标签内部的所有内容
+Element.innerText;		获取标签内部的文本内容
+        <div id="box">
+            风花雪月
+            <h1>风花雪月</h1>
+        </div>
+        <script type="text/javascript">
+            var oBox = document.getElementById('box');
+            //innerHTML
+            alert(oBox.innerHTML);    //风花雪月	<h1>风花雪月</h1>
+            //innerText
+            alert(oBox.innerText);    //风花雪月	风花雪月
+        </script>
+
+
+子节点的操作
+hasChildNodes();	判断是否含有子节点，返回true或false
+remove();	删除当前标签对象，等同于自杀
+removeChild(childElement);	通过父标签对象删除子标签对象
+replaceChild(newChild,oldChild);	替换父节点下的子节点
+appendChild(newChild);	向父标签下追加子标签对象
+insertBefore(newChild,refChild);	向父标签下指定的子节点前添加标签对象
+hasChildNodes();
+
+        <div id="box">
+            <h1 id="h1"></h1>
+        </div>
+        <script type="text/javascript">
+            var oBox = document.getElementById('box');
+            var oH = document.getElementById('h1');
+            alert(oBox.hasChildNodes());    //true
+            alert(oH.hasChildNodes());    //false
+        </script>
+remove();
+removeChild(childElement);
+
+        <ul id="city">
+            <li id="bj">北京</li>
+            <li id="sh">上海</li>
+            <li id="cq">广州</li>
+        </ul>
+        <script type="text/javascript">
+            //删除北京
+            var city = document.getElementById('city');
+            var bj = document.getElementById('bj');
+            bj.remove();
+            city.removeChild(bj);
+            bj.parentElement.removeChild(bj);
+        </script>
+
+replaceChild(newChild,oldChild);
+
+        <div id="box">
+            <p id="czbk">传智播客</p>
+        </div>
+        <script type="text/javascript">
+            //替换box下面的子节点
+            var box = document.getElementById("box");
+            var czbk = document.getElementById("czbk");
+            var txt = document.createElement('h1');
+            txt.innerHTML = '传智播客';
+            box.replaceChild(txt,czbk);
+        </script>
+
+appendChild(newChild);
+insertBefore(newChild,refChild);
+
+        <div id="box">
+            <p id="czbk">传智播客</p>
+        </div>
+        <script type="text/javascript">
+            //替换box下面的子节点
+            var box = document.getElementById("box");
+            var czbk = document.getElementById("czbk");
+            var txt = document.createElement('h1');
+            txt.innerHTML = '传智播客';
+            box.appendChild(txt);      //在box内部最末尾生成txt
+            box.insertBefore(txt,czbk);      //在内部的czbk前面生成txt
+        </script>
+
+
+标签属性的操作
+获得属性的值：element.getAtrribute(“name”) element.属性名
+一般来说，我们直接使用element.属性名即可，如果这种方法不行，就采用上述的方式来获取，如果用element.属性名获取class需要用className才能得到。
+
+    <input type="text" name="test" class="txt" id="txt" />
+    <script type="text/javascript">
+        var txt = document.getElementById('txt');
+        alert(txt.getAttribute('name'));//test
+        alert(txt.name);     //test 可以直接这么获取
+        alert(txt.getAttribute('class'));//txt
+        alert(txt.className);    //txt class比较特殊
+    </script>
+
+设置属性的值：element.setAtrribute(“name”,“value”)
+可以直接采用element.属性名通过单等号来赋值
+
+        <input type="text" name="test" class="txt" id="txt" />
+        <script type="text/javascript">
+            var txt = document.getElementById('txt');
+            txt.setAttribute('name','aaa');
+            //txt.name = 'bbb';可以直接这么来修改
+            alert(txt.name);//把test改成了aaa
+        </script>
+
+删除某个属性：element.removeAtrribute(“name”)
+
+        <input type="text" name="test" class="txt" id="txt" />
+        <script type="text/javascript">
+            var txt = document.getElementById('txt');
+            txt.removeAttribute('name');//删除整个name的属性和值
+            //txt.name = '';清空name属性的值
+            alert(txt.name);
+            </script>
+</body>
+</html>

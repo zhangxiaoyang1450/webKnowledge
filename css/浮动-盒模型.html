@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+float:left right
+浮动元素脱离文档流 空间释放,宽高是内容撑的
+子元素浮动，父元素高度塌陷
+解决塌陷
+1.父元素添加高度
+2.overflow:hidden;
+3.clearfix
+::after{
+content:"",
+display:block;
+clear:both
+}
+
+5.盒模型
+css盒模型  内容 content + padding +border+margin
+1 标准盒模型
+width:200
+width = content
+2 怪异盒模型 (ie6以及ie6以下的浏览器 不写doctype 会表现成怪异)
+width:200
+width = border + padding + content
+标准和模型 和 怪异 转化
+box-sizing : content-box(标准盒模型)  border-box (怪异盒模型);
+
+</body>
+</html>

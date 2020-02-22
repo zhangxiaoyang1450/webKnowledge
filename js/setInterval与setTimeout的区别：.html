@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+setInterval与setTimeout的区别：
+setTimeout()方法只运行一次，也就是说当达到设定的时间后就触发运行指定的代码，运行完后就结束了，
+如果还想再次执行同样的函数，可以在函数体内再次调用setTimeout()，可以达到循环调用的效果。
+setTimeout(function(){ alert("Hello"); }, 3000);
+
+setInterval()是循环执行的，即每达到指定的时间间隔就执行相应的函数或者表达式，是真正的定时器。
+setInterval(function(){ alert("Hello"); }, 3000);
+setInterval(' alert("Hello")', 3000);
+
+用setTimeout实现setInterval:
+function ff(fun,delay){
+        setTimeout(
+            function(){
+                 fun();
+                 ff(fun,delay);
+        },delay);
+}
+</body>
+</html>

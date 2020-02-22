@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>垂直居中练习</title>
+</head>
+<style>
+    .one{
+        width: 400px;
+        height: 400px;
+        background: chartreuse;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .two{
+        position: absolute;
+        /*top: 50%;*/
+        /*left: 50%;*/
+        text-align: center;
+        /*transform: translate(-50%, -50%);*/
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        /*clip-path: polygon(0px 0px,0px 0px,0px 0px,0px 0px,);*/
+
+    }
+</style>
+<body>
+<div class="one">
+    <div class="two">居中文字</div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

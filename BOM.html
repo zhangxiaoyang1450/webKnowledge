@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+三、主流浏览器的介绍
+浏览器内核主要指的是浏览器的渲染引擎，2013 年以前，代表有 Trident（IE），Gecko（firefox），
+Webkit（Safari chrome 等）以及 Presto（opera)。2013 年，谷歌开始研发 blink 引擎，
+chrome 28 以后开始使用，而 opera 则放弃了自主研发的 Presto 引擎，投入谷歌怀抱，
+和谷歌一起研发 blink 引擎，国内各种 chrome系的浏览器（360、UC、QQ、2345 等等）也纷纷放弃 webkit，投入 blink 的怀抱。
+
+移动端的浏览器内核主要说的是系统内置浏览器的内核。
+
+目前移动设备浏览器上常用的内核有 Webkit，Blink，Trident，Gecko 等，
+其中 iPhone 和 iPad 等苹果 iOS 平台主要是 WebKit，Android 4.4 之前的 Android
+系统浏览器内核是 WebKit，Android4.4 系统浏览器切换到了Chromium，内核是 Webkit 的分支 Blink，Windows Phone 8 系统浏览器内核是 Trident。
+
+四、BOM对象
+
+window 对象，是 JS 的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
+document 对象，文档对象；
+location 对象，浏览器当前URL信息；
+navigator 对象，浏览器本身信息；
+screen 对象，客户端屏幕信息；
+history 对象，浏览器访问历史信息；
+1）、Window对象：BOM的核心对象是window，它表示浏览器的一个实例。
+在浏览器中，window对象有双重角色，它既是通过javascript访问浏览器窗口的一个接口，又是ECMAScript规定的Global对象。 
+
+所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员。
+全局变量是 window 对象的属性。
+全局函数是 window 对象的方法。
+window对象常用方法有
+
+弹框类的方法。前面省略window
+alert('提示信息')
+confirm("确认信息")
+prompt("弹出输入框")
+open("url地址"，“打开的方式（可以是-self或-black）”，“新窗口的大小”）
+注：如果url为空，则默认打开一个空白页面，如果打开方式为空，则默认为新窗口方式打开页面。返回值为：返回新打开窗口的window对象
+close()  关闭当前的网页。 注：存在兼容性问题：FF：禁止设置关闭浏览器的代码
+
+ Chrome：默认直接关闭
+
+ IE：询问用户
+
+window.moveTo() - 移动当前窗口
+window.resizeTo() - 调整当前窗口的尺寸
+
+定时器，清除定时器。
+
+setTimeout(函数，时间) 只执行一次
+setInterval(函数，时间) 无限执行
+
+clearTimeout/clearInterval(定时器名称) 清除定时器
+
+2）、location对象
+window.location对象：用于获得当前页面的地址 (URL)，并把浏览器重定向到新的页面。在编写时可不使用 window 这个前缀。
+location.herf = 'url地址'
+hash 返回#号后面的字符串，不包含散列，则返回空字符串。
+host 返回服务器名称和端口号
+pathname 返回目录和文件名。 /project/test.html
+search 返回？号后面的所有值。
+port 返回URL中的指定的端口号，如URL中不包含端口号返回空字符串
+portocol 返回页面使用的协议。 http:或https:
+3）、navigator对象
+window.navigator 对象包含有关访问者浏览器的信息。在编写时可不使用 window 这个前缀。
+navigator.platform：操作系统类型；
+navigator.userAgent：浏览器设定的User-Agent字符串。
+navigator.appName：浏览器名称；
+navigator.appVersion：浏览器版本；
+navigator.language：浏览器设置的语言；
+userAgent是最常用的属性，用来完成浏览器判断。
+if(window.navigator.userAgent.indexOf('MSIE')!=-1){
+alert('我是IE');
+}else{
+alert('我不是IE');
+}
+4）、screen对象
+window.screen 对象包含有关用户屏幕的信息。
+ screen.availWidth 属性返回访问者屏幕的宽度，以像素计，减去界面特性，比如窗口任务栏。                                     
+   screen.availHeight 属性返回访问者屏幕的高度，以像素计，减去界面特性，比如窗口任务栏。
+
+document.write(screen.availHeight+screen.availWidth);//获取屏幕的宽度和高度之和
+5）、history对象
+window.history 对象包含浏览器的历史。为了保护用户隐私，对 JavaScript 访问该对象的方法做出了限制。
+
+ history.back() - 加载历史列表中的前一个 URL。返回上一页。
+
+ history.forward() - 加载历史列表中的下一个 URL。返回下一页。                                                                                             go(“参数”) -1表示上一页，1表示下一页。
+
+综合以上，页面跳转的方法有：
+
+1、window.location.href = '你所要跳转到的页面';
+2、window.open('你所要跳转到的页面’);
+3、window.history.back(-1):返回上一页
+4、window.history.go(-1/1):返回上一页或下一页五、
+5、history.go("baidu.com")；
+五、窗口尺寸与大小
+可视区尺寸：  document.documentElement.clientWidth                                                                                                                             document.documentElement.clientHeight
+
+滚动条滚动距离： document.documentElement.clientScrollTop                                                                                                                          document.documentElement.clientScrollLeft                                                                                                                        存在兼容性问题（Chrome与其它浏览器不同），解决办法如下
+
+var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+var scrollLeft = document.documentElement.scrollTop||document.body.scrollLeft;
+内容高/宽：元素.scrollHeight/scrollWidth
+
+当一个时间发生时鼠标到页面可视区的距离：clientX/clientY
+
+六、系统对话框
+alert()、confirm()和prompt()
+
+<script type="text/javascript">
+    alert("Hello world!");
+</script>
+<script type="text/javascript">
+    /*
+    判断用户点击了OK还是Cancel，可以检查confirm()方法返回的布尔值：true表示单击了OK，false表示单击了Cancel或单击了右上角的X按钮。
+     */
+    if (confirm("Are you sure?")) {
+        alert("I'm so glad you're sure! ");
+    } else {
+        alert("I'm sorry to hear you're not sure. ");
+    }
+</script>
+<script type="text/javascript">
+    /*
+    prompt()方法用来生成一个"提示"框，用于提示用户输入一些文本。提示框除了显示OK和Cancel按钮之外 ，还会显示一个文本输入域，用来输入文本内容。该方法接收两个参数：要显示给用户的文本提示和文本输入域的默认值(可以是一个空字符串)
+     */
+    var result = prompt("What is your name? ", "");
+    if (result !== null) {
+        alert("Welcome, " + result);
+    }
+</script>
+
+</body>
+</html>
