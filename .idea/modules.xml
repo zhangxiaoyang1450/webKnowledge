@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Desktop/fellows25-master/.idea/fellows25-master.iml" filepath="$USER_HOME$/Desktop/fellows25-master/.idea/fellows25-master.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/work的副本/fingo_admin/.idea/fingo_admin.iml" filepath="$USER_HOME$/Desktop/work的副本/fingo_admin/.idea/fingo_admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/webKnowledge.iml" filepath="$PROJECT_DIR$/.idea/webKnowledge.iml" />
       <module fileurl="file://$USER_HOME$/Desktop/知识点/.idea/知识点.iml" filepath="$USER_HOME$/Desktop/知识点/.idea/知识点.iml" />
     </modules>

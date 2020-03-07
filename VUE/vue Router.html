@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+路由中有三个基本的概念 route, routes, router。
+
+1， route，它是一条路由，由这个英文单词也可以看出来，它是单数， Home按钮 => home内容， 这是一条route, about按钮 => about 内容， 这是另一条路由。
+
+2， routes 是一组路由，把上面的每一条路由组合起来，形成一个数组。[{home 按钮 =>home内容 }， { about按钮 => about 内容}]
+
+3， router 是一个机制，相当于一个管理者，它来管理路由。因为routes 只是定义了一组路由，它放在哪里是静止的，当真正来了请求，怎么办？
+就是当用户点击home 按钮的时候，怎么办？这时router 就起作用了，它到routes 中去查找，去找到对应的 home 内容，所以页面中就显示了 home 内容。
+
+4，客户端中的路由，实际上就是dom 元素的显示和隐藏。当页面中显示home 内容的时候，about 中的内容全部隐藏，反之也是一样。
+客户端路由有两种实现方式：基于hash 和基于html5 history api.
+
+
+打开浏览器控制台，首先看到 router-link 标签渲染成了 a 标签，to 属性变成了a 标签的 href 属性，这时就明白了点击跳转的意思。
+
+
+动态路由：
+在配置路由的时候，就不能写死, 就是路由中的path属性，不能写死，那要怎么设置? 导航到 user 组件，路径中肯定有user, id 不同，
+那就给路径一个动态部分来匹配不同的id. 在vue-router中，动态部分 以 : 开头，那么路径就变成了 /user/:id,
+这条路由就可以这么写： { path:"/user/:id", component: user }.
+
+嵌套路由
+
+嵌套路由，主要是由我们的页面结构所决定的。当我们进入到home页面的时候，
+它下面还有分类，如手机系列，平板系列，电脑系列。当我们点击各个分类的时候，
+它还是需要路由到各个部分，如点击手机，它肯定到对应到手机的部分。
+所谓重定向，就是重新给它指定一个方向，它本来是访问 / 路径，我们重新指向
+// 重定向
+{
+path: ‘/’,
+redirect: ‘/home’
+}
+
+首先要定义route, 一条路由的实现。它是一个对象，由两个部分组成： path和component. path 指路径，component 指的是组件。如：{path:’/home’, component: home}
+
+我们这里有两条路由，组成一个routes:
+const routes = [
+    { path: ‘/home’, component: Home },
+    { path: ‘/about’, component: About }
+]
+最后创建router 对路由进行管理，它是由构造函数 new vueRouter() 创建，接受routes 参数。
+
+const router = new VueRouter({
+    routes // routes: routes 的简写
+})
+　配置完成后，把router 实例注入到 vue 根实例中,就可以使用路由了
+
+const app = new Vue({
+    router
+}).$mount(’#app’)
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvwzyz
+abcdefghijklmnopqrstuvwxyz
+tas
+// 引入路由
+import router from “./router.js” // import router 的router 一定要小写， 不要写成Router, 否则报 can’t match的报错
+new Vue({
+el: ‘#app’,
+router, // 注入到根实例中
+render: h => h(App)
+})
+</body>
+</html>

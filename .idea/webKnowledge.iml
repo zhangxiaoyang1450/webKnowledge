@@ -9,5 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="知识点" />
+    <orderEntry type="module" module-name="fingo_admin" />
+    <orderEntry type="module" module-name="fellows25-master" />
   </component>
 </module>
