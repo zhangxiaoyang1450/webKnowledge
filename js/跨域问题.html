@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+跨域解决方案
+1、 通过jsonp跨域
+2、 document.domain + iframe跨域
+3、 location.hash + iframe
+4、 window.name + iframe跨域
+5、 postMessage跨域
+6、 跨域资源共享（CORS）
+7、 nginx代理跨域
+8、 nodejs中间件代理跨域
+9、 WebSocket协议跨域
+    https://blog.csdn.net/wangchengiii/article/details/78081032
+    1.同源
+  同源策略是指一段脚本只能读取来自同一来源的窗口和文档的属性,所谓同源是指"协议+域名+端口"三者相同，即便两个不同的域名指向同一个ip地址，也非同源。
+1.1什么是跨域？
+
+跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。
+广义的跨域：
+1.) 资源跳转： A链接、重定向、表单提交
+2.) 资源嵌入： link script img frame等dom标签，还有样式中background:url()、@font-face()等文件外链
+3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等
+
+1. jsonp是说json格式数据使用的一种方式。
+JSONP包含两部分：回调函数和数据。
+回调函数：当响应到来时要放在当前页面被调用的函数。
+数据：就是传入回调函数中的json数据，也就是回调函数的参数了。
+    原理是：动态插入script标签，通过script标签引入一个js文件，
+    这个js文件载入成功后会执行我们在url参数中指定的函数，
+    并且会把我们需要的json数据作为参数传入。jsonp是需要服务器端的页面进行相应的配合的。
+2.
+CORS：一种跨域访问的机制，可以让AJAX实现跨域访问；CORS允许一个域上的网络应用向另一个域提交跨域AJAX请求。
+　　服务器设置Access-Control-Allow-Origin HTTP响应头之后，浏览器将会允许跨域请求．
+　　就是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败。
+
+　　1) IE中对CORS的实现是通过xdr
+var xdr = new XDomainRequest();
+xdr.onload = function(){
+    console.log(xdr.responseText);
+}
+xdr.open('get', 'http://www.test.com');
+......
+xdr.send(null);
+　　2) 其它浏览器中的实现就在xhr中
+var xhr =  new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+  if(xhr.readyState === 4 && xhr.status === 200){
+        console.log(xhr.responseText);
+        }
+    }
+}
+xhr.open('get', 'http://www.test.com');
+......
+xhr.send(null);
+　　3) 实现跨浏览器的CORS
+function createCORS(method, url){
+    var xhr = new XMLHttpRequest();
+    if('withCredentials' in xhr){
+        xhr.open(method, url, true);
+    }else if(typeof XDomainRequest != 'undefined'){
+        var xhr = new XDomainRequest();
+        xhr.open(method, url);
+    }else{
+        xhr = null;
+    }
+    return xhr;
+}
+var request = createCORS('get', 'http://www.test.com');
+if(request){
+    request.onload = function(){
+        ......
+    };
+    request.send();
+}
+4、postMessage
+这个功能主要包括接受信息的"message"事件和发送消息的"postMessage"方法。
+比如damonare.cn域的A页面通过iframe嵌入了一个google.com域的B页面，可以通过以下方法实现A和B的通信
+
+这种方式通常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接收消息。不扯犊子了，直接上代码：
+
+// 发送消息端window.parent.postMessage('message', 'http://test.com');·
+// 接收消息端var mc = new MessageChannel();
+            mc.addEventListener('message',(event) => {
+            var origin = event.origin || event.originalEvent.origin;
+            if (origin === 'http://test.com')
+             {console.log('验证通过')}
+             }
+             );
+
+</body>
+</html>
