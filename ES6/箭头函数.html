@@ -13,15 +13,18 @@
 时所在的对象。
 (2)不可以当作构造函数，也就是说，不可以使用new命令，否
 则会抛出一个错误。
-(3)不可以使用arguments对象，该对象在函数体内不存在。
+(3)不可以使用arguments对象，该对象在函数体内不存在。(arguments 是一个对应于传递给函数的参数的类数组对象。)
 如果要用，可以用 rest 参数代替。
 注释：了解arguments这个对象之前先来认识一下javascript的一些功能：
 其实Javascript并没有重载函数的功能， 但是Arguments对象能够模拟重载
 Javascrip中每个函数都会有一个Arguments对象实例arguments，
 它引用着函数的实参，可以用数组下标的方式"[]"引用arguments的元素，
 arguments.length为函数实参个数，arguments.callee引用函数自身。
-apply调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments)；即A对象调用B对象的方法。func.apply(thisArg, [argsArray])
+
+call、apply、bind的作用是改变函数运行时this的指向，所以先说清楚this。
+apply调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments)；即A对象调用B对象的方法,侧重于数组。func.apply(thisArg, [argsArray])
 call调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.call(A, args1,args2)；即A对象调用B对象的方法。func.call(thisArg, arg1, arg2, ...)
+bind调用一个对象的一个方法，用另一个对象替换当前对象，生成一个新对象，不同于原来的this指向
 
 箭头函数和function区别
 1.写法不同

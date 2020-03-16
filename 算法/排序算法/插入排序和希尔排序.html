@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+2、插入排序
+原理：插入排序的原理如下。第一个元素默认是已排序元素，取出下一个元素和当前元素比较，如果当前元素大就交换位置。那么
+此时第一个元素就是当前的最小数，所以下次取出操作从第三个元素开始，向前对比，重复之前的操作。
+
+核心算法：
+function insertion(array) {
+checkArray(array);
+for (let i = 1; i < array.length; i++) {
+for (let j = i - 1; j >= 0 && array[j] > array[j + 1]; j--)
+swap(array, j, j + 1);
+}
+return array;
+}
+
+4、希尔排序（Shell Sort）
+
+简单插入排序的改进版。它与插入排序的不同之处在于，它会优先比较距离较远的元素。希尔排序又叫缩小增量排序。
+</body>
+</html>
